@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "583791137615",
+    "project_id": "daily-life-bd526",
+    "storage_bucket": "daily-life-bd526.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:583791137615:android:bdd10f85d28b5a96492b3a",
+        "android_client_info": {
+          "package_name": "com.example.dailylife"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "583791137615-cp0f3bccpqe6ed83upnriqpu3ljcqcc1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBEkgb-Q-myWoSJOsWsaUaBazPqT12Feqo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "583791137615-cp0f3bccpqe6ed83upnriqpu3ljcqcc1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
