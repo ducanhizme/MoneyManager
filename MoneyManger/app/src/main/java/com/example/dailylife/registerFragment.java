@@ -1,5 +1,6 @@
 package com.example.dailylife;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.dailylife.controller.ISignUpController;
 import com.example.dailylife.controller.SignUpController;
@@ -29,6 +31,8 @@ public class registerFragment extends Fragment implements ISignUpView {
     private ISignUpController signUpController;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private Context context;
+    public DBHelper db;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -77,7 +81,8 @@ public class registerFragment extends Fragment implements ISignUpView {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        signUpController = new SignUpController(this);
+        db = new DBHelper(getActivity());
+        signUpController = new SignUpController(this,db);
         binding_.btnSignUp.setOnClickListener(view_ ->{
             signUpController.onSignUp(binding_.userName.getText().toString(),
                     binding_.SignUpEmailAddress.getText().toString(),
@@ -100,6 +105,9 @@ public class registerFragment extends Fragment implements ISignUpView {
                 break;
             case 3:
                 binding_.txtLayoutPassword.setError(getString(R.string.password_error));
+                break;
+            case 4:
+                Toast.makeText(getActivity()," Account already exists please sign in",Toast.LENGTH_SHORT).show();
                 break;
         }
     }

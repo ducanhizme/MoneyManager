@@ -6,6 +6,7 @@ import androidx.core.content.ContextCompat;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import com.example.dailylife.databinding.ActivitySignInSignUpFormBinding;
@@ -16,6 +17,7 @@ import java.util.Objects;
 public class SignInSignUpForm extends AppCompatActivity {
     private ActivitySignInSignUpFormBinding binding;
     private ViewPagerAdapter vpa;
+    DBHelper db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,4 +42,5 @@ public class SignInSignUpForm extends AppCompatActivity {
             }
         }).attach();
     }
+
 }
