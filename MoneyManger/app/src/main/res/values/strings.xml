@@ -17,6 +17,9 @@
     <string name="user_name_error">Minimum 25 characters</string>
     <string name="email_error">Invalid Email</string>
     <string name="password_error">Minimum 6 characters</string>
+    <string name="account_error"> Account already exists,Please sign in</string>
+    <string name="password_error_sign_in">Wrong password</string>
+    <string name="email_error_sign_in">Wrong email</string>
 
 
 </resources>

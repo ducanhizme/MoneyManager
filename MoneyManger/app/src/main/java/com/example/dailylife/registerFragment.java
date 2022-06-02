@@ -1,22 +1,20 @@
 package com.example.dailylife;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.dailylife.controller.ISignUpController;
-import com.example.dailylife.controller.SignUpController;
+import com.example.dailylife.controller.ILoginController;
+import com.example.dailylife.controller.LoginController;
 import com.example.dailylife.databinding.FragmentRegisterBinding;
 import com.example.dailylife.view.ISignUpView;
 
@@ -28,7 +26,7 @@ import com.example.dailylife.view.ISignUpView;
 public class registerFragment extends Fragment implements ISignUpView {
 
     private FragmentRegisterBinding binding_;
-    private ISignUpController signUpController;
+    private ILoginController signUpController;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private Context context;
@@ -81,12 +79,16 @@ public class registerFragment extends Fragment implements ISignUpView {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        db = new DBHelper(getActivity());
-        signUpController = new SignUpController(this,db);
+        db = new DBHelper(getContext());
+        signUpController = new LoginController(this,db,null);
         binding_.btnSignUp.setOnClickListener(view_ ->{
-            signUpController.onSignUp(binding_.userName.getText().toString(),
-                    binding_.SignUpEmailAddress.getText().toString(),
-                    binding_.SignUpPassword.getText().toString());
+            boolean check = signUpController.onSignUp(binding_.userName.getText().toString(),
+                                                      binding_.SignUpEmailAddress.getText().toString(),
+                                                      binding_.SignUpPassword.getText().toString());
+            if(check){
+                Intent intent = new Intent(getContext(), MainActivity.class);
+                startActivity(intent);
+            }
         });
     }
 
@@ -107,7 +109,7 @@ public class registerFragment extends Fragment implements ISignUpView {
                 binding_.txtLayoutPassword.setError(getString(R.string.password_error));
                 break;
             case 4:
-                Toast.makeText(getActivity()," Account already exists please sign in",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(),getString(R.string.account_error),Toast.LENGTH_SHORT).show();
                 break;
         }
     }

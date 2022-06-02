@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import com.example.dailylife.databinding.ActivityLoginBinding;
 import com.example.dailylife.databinding.ActivityMainBinding;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -28,8 +29,6 @@ import java.util.Date;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
-    private GoogleSignInOptions gso;
-    private GoogleSignInClient gsc;
     private ActivityMainBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,27 +37,10 @@ public class MainActivity extends AppCompatActivity {
         getWindow().setStatusBarColor(ContextCompat.getColor(this,R.color.background));
         View view = binding.getRoot();
         setContentView(view);
-        setDataGoogleSigned();
-        setGreet();
+
     }
 
-    private void setDataGoogleSigned(){
-        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
-        gsc = GoogleSignIn.getClient(this,gso);
-        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-        if(account != null){
-            String name = account.getDisplayName();
-            Log.i("name",name);
-            binding.nameDisplay.setText(name);
-            Uri avatarPhotoUri = account.getPhotoUrl();
-            if(avatarPhotoUri == null){
-                binding.avatar.setImageResource(R.drawable.ic_baseline_person_24);
-            }else{
-                Picasso.get().load(avatarPhotoUri).into(binding.avatar);
-            }
 
-        }
-    }
 
     private void setGreet(){
         String greeting = "Welcome";
