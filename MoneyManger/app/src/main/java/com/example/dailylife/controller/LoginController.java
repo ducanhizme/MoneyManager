@@ -85,28 +85,35 @@ public class LoginController implements ILoginController  {
 
     public Boolean checkAlreadyExistsAccount(UserModel user){
         SQLiteDatabase db = this.dbHelper.getReadableDatabase();
-        String insert_user = "SELECT * FROM "+DBHelper.TBL_USER+" WHERE Name = ? AND Email = ? AND Password = ?";
-        Cursor cursor = db.rawQuery(insert_user,new String[]{user.getUserName(), user.getEmail(),user.getPassword()});
+        String select = "SELECT * FROM "+DBHelper.TBL_USER+" WHERE Name = ? AND Email = ? AND Password = ?";
+        Cursor cursor = db.rawQuery(select,new String[]{user.getUserName(), user.getEmail(),user.getPassword()});
         if(cursor.getCount() > 0) return false;
         else return true;
     }
 
     public Boolean checkAlreadyExistsEmail(String email){
         SQLiteDatabase db = this.dbHelper.getReadableDatabase();
-        String insert_user = "SELECT * FROM "+DBHelper.TBL_USER+" WHERE Email = ?";
-        Cursor cursor = db.rawQuery(insert_user,new String[]{email});
+        String select = "SELECT * FROM "+DBHelper.TBL_USER+" WHERE Email = ?";
+        Cursor cursor = db.rawQuery(select,new String[]{email});
         if(cursor.getCount() > 0) return true;
         else return false;
     }
 
     public Boolean checkAlreadyExistsPassword(String password){
         SQLiteDatabase db = this.dbHelper.getReadableDatabase();
-        String insert_user = "SELECT * FROM "+DBHelper.TBL_USER+" WHERE Password = ?";
-        Cursor cursor = db.rawQuery(insert_user,new String[]{password});
+        String select = "SELECT * FROM "+DBHelper.TBL_USER+" WHERE Password = ?";
+        Cursor cursor = db.rawQuery(select,new String[]{password});
         if(cursor.getCount() > 0) return true;
         else return false;
     }
 
-
-
+    public int getID(String email,String password){
+        SQLiteDatabase db = this.dbHelper.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM "+DBHelper.TBL_USER,null);
+        while (cursor.moveToNext()){
+            if(email.equals(cursor.getString(2))&&password.equals(cursor.getString(3)))
+                return cursor.getInt(0);
+        }
+        return -1;
+    }
 }

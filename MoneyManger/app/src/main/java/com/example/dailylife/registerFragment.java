@@ -26,7 +26,7 @@ import com.example.dailylife.view.ISignUpView;
 public class registerFragment extends Fragment implements ISignUpView {
 
     private FragmentRegisterBinding binding_;
-    private ILoginController signUpController;
+    private LoginController signUpController;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private Context context;
@@ -86,8 +86,9 @@ public class registerFragment extends Fragment implements ISignUpView {
                                                       binding_.SignUpEmailAddress.getText().toString(),
                                                       binding_.SignUpPassword.getText().toString());
             if(check){
+                int id_ = signUpController.getID(binding_.SignUpEmailAddress.getText().toString(),binding_.SignUpPassword.getText().toString());
                 Intent intent = new Intent(getContext(), MainActivity.class);
-                startActivity(intent);
+                intent.putExtra(SignInSignUpForm.ID_USER_MSG,id_);
             }
         });
     }

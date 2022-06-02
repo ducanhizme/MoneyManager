@@ -17,6 +17,7 @@ import java.util.Objects;
 public class SignInSignUpForm extends AppCompatActivity {
     private ActivitySignInSignUpFormBinding binding;
     private ViewPagerAdapter vpa;
+    public static final String ID_USER_MSG = "ID_USER";
     DBHelper db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

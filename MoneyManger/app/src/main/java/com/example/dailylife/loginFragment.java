@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,7 @@ import com.example.dailylife.view.ISignUpView;
 public class loginFragment extends Fragment implements ISignInView {
 
     private FragmentLoginBinding binding_;
+
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -79,7 +81,10 @@ public class loginFragment extends Fragment implements ISignInView {
         binding_.btnSignIn.setOnClickListener(view_ ->{
             boolean check = lc.onSignIn(binding_.emailAddress.getText().toString(),binding_.password.getText().toString());
             if(check){
+                int id_ = lc.getID(binding_.emailAddress.getText().toString(),binding_.password.getText().toString());
+                Log.d("Extra",id_+"");
                 Intent intent = new Intent(getContext(), MainActivity.class);
+                intent.putExtra(SignInSignUpForm.ID_USER_MSG,id_);
                 startActivity(intent);
             }
         });
