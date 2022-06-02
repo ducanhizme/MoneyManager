@@ -89,6 +89,7 @@ public class registerFragment extends Fragment implements ISignUpView {
                 int id_ = signUpController.getID(binding_.SignUpEmailAddress.getText().toString(),binding_.SignUpPassword.getText().toString());
                 Intent intent = new Intent(getContext(), MainActivity.class);
                 intent.putExtra(SignInSignUpForm.ID_USER_MSG,id_);
+                startActivity(intent);
             }
         });
     }
